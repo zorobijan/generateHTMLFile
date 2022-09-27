@@ -1,8 +1,8 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 
-const generateHTML = ({name, id, email, role}) =>
-  `<!DOCTYPE html>
+const generateHTML = ({ name, id, email, role }) =>
+    `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -18,7 +18,6 @@ const generateHTML = ({name, id, email, role}) =>
     <ul class="list-group">
       <li class="list-group-item">ID: ${id}</li>
       <li class="list-group-item">Email: ${email}</li>
-      <li class="list-group-item">Email: ${email}</li>
     </ul>
   </div>
 </div>
@@ -26,34 +25,48 @@ const generateHTML = ({name, id, email, role}) =>
 </html>`;
 
 inquirer
-  .prompt([
-    {
-      type: 'input',
-      name: 'name',
-      message: 'What is your name?',
-    },
-    {
-      type: 'input',
-      name: 'id',
-      message: 'What is your id number?',
-    },
-    {
-      type: 'input',
-      name: 'email',
-      message: 'What is your email?',
-    },
-    {
-      type: 'input',
-      name: 'role',
-      message: 'What is your role?',
-    },
-  ])
-  .then()
+    .prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'What is your name?',
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: 'What is your id number?',
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'What is your email?',
+        },
+        {
+            type: 'input',
+            name: 'role',
+            message: 'What is your role?',
+        },
+        {
+            type: 'input',
+            name: 'gitHub',
+            message: 'What is your github address?',
+        },
+        {
+            type: 'input',
+            name: 'school',
+            message: 'Where did you learn to code?',
+        },
+        {
+            type: 'input',
+            name: 'telephone',
+            message: 'What is your phone number?',
+        },
+    ])
 
-  .then((answers) => {
-    const htmlPageContent = generateHTML(answers);
+    .then((answers) => {
+        const htmlPageContent = generateHTML(answers);
 
-    fs.writeFile('index.html', htmlPageContent, (err) =>
-      err ? console.log(err) : console.log('Successfully created index.html!')
-    );
-  });
+        fs.writeFile('index.html', htmlPageContent, (err) =>
+            err ? console.log(err) : console.log('Successfully created index.html!')
+        );
+    });

@@ -24,7 +24,7 @@ describe('Employee', () => {
 
         
 
-        it('should return the name that I give it, upon instantiation'. () => {
+        it('should return the name that I give it, upon instantiation', () => {
 
         })
             //Arrange
@@ -42,15 +42,6 @@ describe('Employee', () => {
 
     describe('getRole', () => {
 
-        it('should return the role that I give it, upon instantiation'. () => {
-
-        })
-            //Arrange
-            //Act
-            let newEmployee = new Employee("sam", 1, "sam@gmail.com")
-            
-            //Assert
-            expect(newEmployee.getRole()).toEqual("Employee")
 
     })
 })

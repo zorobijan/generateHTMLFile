@@ -24,49 +24,77 @@ const generateHTML = ({ name, id, email, role }) =>
 </body>
 </html>`;
 
-inquirer
-    .prompt([
-        {
-            type: 'input',
-            name: 'name',
-            message: 'What is your name?',
-        },
-        {
-            type: 'input',
-            name: 'id',
-            message: 'What is your id number?',
-        },
-        {
-            type: 'input',
-            name: 'email',
-            message: 'What is your email?',
-        },
-        {
-            type: 'input',
-            name: 'role',
-            message: 'What is your role?',
-        },
-        {
-            type: 'input',
-            name: 'gitHub',
-            message: 'What is your github address?',
-        },
-        {
-            type: 'input',
-            name: 'school',
-            message: 'Where did you learn to code?',
-        },
-        {
-            type: 'input',
-            name: 'telephone',
-            message: 'What is your phone number?',
-        },
-    ])
+let employees = [
 
-    .then((answers) => {
-        const htmlPageContent = generateHTML(answers);
+]
+let newEmployee = () => {
 
-        fs.writeFile('index.html', htmlPageContent, (err) =>
-            err ? console.log(err) : console.log('Successfully created index.html!')
-        );
-    });
+    inquirer
+        .prompt([
+            {
+                type: 'input',
+                name: 'name',
+                message: 'What is your name?',
+            },
+            {
+                type: 'input',
+                name: 'id',
+                message: 'What is your id number?',
+            },
+            {
+                type: 'input',
+                name: 'email',
+                message: 'What is your email?',
+            },
+            {
+                type: 'list',
+                name: 'role',
+                message: 'What is your role?',
+                choices: ['engineer', 'intern', 'manager']
+            },
+            {
+                type: 'input',
+                name: 'gitHub',
+                message: 'What is your github address?',
+                when: (answers) => {
+                    if (answers.role === 'engineer') return true
+                    else return false
+                }
+            },
+            {
+                type: 'input',
+                name: 'officeNumber',
+                message: 'What is your office number?',                
+                when: (answers) => {
+                    if (answers.role === 'manager') return true
+                    else return false
+                }
+            },
+            {
+                type: 'input',
+                name: 'school',
+                message: 'Where did you learn to code?',                
+                when: (answers) => {
+                    if (answers.role === 'intern') return true
+                    else return false
+                }
+            },
+        ])
+
+        .then((answers) => { 
+            const htmlPageContent = generateHTML(answers);
+            if (answers.continue === 'Quit')
+            {
+                // you will enter this condition if the user is done adding employees
+                console.log('generate cards once quit or one at a time while making new employees')
+                fs.writeFile('index.html', htmlPageContent, (err) =>
+                err ? console.log(err) : console.log('Successfully created index.html!')
+            );
+                // this will start a new inquirer prompt for a new employee if the user didn't choose to Quit
+            } else if (answers.role === 'engineer') 
+                
+            newEmployee()
+            
+        });
+}
+newEmployee()

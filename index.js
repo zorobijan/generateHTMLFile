@@ -24,9 +24,7 @@ const generateHTML = ({ name, id, email, role }) =>
 </body>
 </html>`;
 
-let employees = [
-
-]
+let employees = []
 let newEmployee = () => {
 
     inquirer
@@ -54,7 +52,7 @@ let newEmployee = () => {
             },
             {
                 type: 'input',
-                name: 'gitHub',
+                name: 'github',
                 message: 'What is your github address?',
                 when: (answers) => {
                     if (answers.role === 'engineer') return true
@@ -79,19 +77,25 @@ let newEmployee = () => {
                     else return false
                 }
             },
+            {
+                type: 'confirm',
+                name: 'continue',
+                message: 'Would you like to add another employee?',                
+            },
         ])
 
         .then((answers) => { 
+            console.log(answers)
             const htmlPageContent = generateHTML(answers);
-            if (answers.continue === 'Quit')
-            {
+            if (answers.continue === false) {
                 // you will enter this condition if the user is done adding employees
                 console.log('generate cards once quit or one at a time while making new employees')
-                fs.writeFile('index.html', htmlPageContent, (err) =>
+                
+                fs.appendFile('./dist/index.html', htmlPageContent, (err) =>
                 err ? console.log(err) : console.log('Successfully created index.html!')
             );
                 // this will start a new inquirer prompt for a new employee if the user didn't choose to Quit
-            } else if (answers.role === 'engineer') 
+            } else if (answers) 
                 
             newEmployee()
             

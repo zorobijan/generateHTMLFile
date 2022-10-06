@@ -99,7 +99,7 @@ console.log(answers)
 
                 // you will enter this condition if the user is done adding employees
                 const htmlPageContent = generateHTML(employeesArray);
-                fs.appendFile('./dist/index.html', htmlPageContent, (err) =>
+                fs.writeFile('./dist/index.html', htmlPageContent, (err) =>
                     err ? console.log(err) : console.log('Successfully created index.html!')
                 );
             }

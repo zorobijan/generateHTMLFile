@@ -82,7 +82,7 @@ let newEmployee = () => {
         ])
 
         .then((answers) => {
-console.log(answers)
+            console.log(answers)
             if (answers.role === 'engineer') {
                 let engineer = new Engineer(answers.name, answers.id, answers.email, answers.github)
                 employeesArray.push(engineer)

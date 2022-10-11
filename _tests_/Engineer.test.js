@@ -15,7 +15,6 @@ describe('Engineer', () => {
 
             //Assert
             expect(newEngineer.getRole()).toEqual("Engineer");
-            expect(newEngineer.getGitHub()).toEqual("github.com/sam")
 
 
         })
